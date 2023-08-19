@@ -228,7 +228,7 @@ span{
 p{
     color: white;
 }
-.modal-content{
+.modal-content1{
     margin-left: auto;
     max-width: 600px !important;
     margin-top: 80px;
@@ -241,4 +241,11 @@ pdivsongs{
     margin-top: 40px;
     margin-left: 30px;
     /* text-align: center; */
+}
+#musict{
+    text-align: center;
+    margin-top: 50%;
+}
+.modal-header{
+    color: white !important;
 }

@@ -2,10 +2,25 @@
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
-import { getDatabase,set,ref,update} from "https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js";
+import { getDatabase,set,ref,update,get,child} from "https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js";
 import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
+const firebaseConfig = {
+    apiKey: "AIzaSyCohmVQGQEG5LZzLM-AqgZcAQoqkR7FsOs",
+    authDomain: "music-auth-1329c.firebaseapp.com",
+    databaseURL: "https://music-auth-1329c-default-rtdb.firebaseio.com",
+    projectId: "music-auth-1329c",
+    storageBucket: "music-auth-1329c.appspot.com",
+    messagingSenderId: "1075480865502",
+    appId: "1:1075480865502:web:3bb0854912760ac911304f"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+const database=getDatabase(app);
+const auth = getAuth();
 
 // Your web app's Firebase configuration
 
@@ -88,21 +103,7 @@ if (forgetPassLink) {
 
 
 
-const firebaseConfig = {
-    apiKey: "AIzaSyCohmVQGQEG5LZzLM-AqgZcAQoqkR7FsOs",
-    authDomain: "music-auth-1329c.firebaseapp.com",
-    databaseURL: "https://music-auth-1329c-default-rtdb.firebaseio.com",
-    projectId: "music-auth-1329c",
-    storageBucket: "music-auth-1329c.appspot.com",
-    messagingSenderId: "1075480865502",
-    appId: "1:1075480865502:web:3bb0854912760ac911304f"
-};
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-
-const database=getDatabase(app);
-const auth = getAuth();
 
 //for signup
 var submitsignupdata=document.getElementById('submitsignupdata');
@@ -170,6 +171,7 @@ if (submitlogindata) {
                 //opening the profile page of user after lognin
                 window.location.href = "profile.html"; 
                 
+
                 
             })
             .catch((error) => {
@@ -177,6 +179,8 @@ if (submitlogindata) {
                 const errorMessage = error.message;
                 alert("Something went wrong!");
             });
+
+            
     });
 }
             

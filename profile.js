@@ -2,15 +2,17 @@
 
 // Import the functions you need from the SDKs you need
 
-import { getFirestore } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
-import { getDatabase,set,ref,update,child,onValue,get} from "https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js";
-import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
+import { getDatabase,ref,update,child,get} from "https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js";
+import { getAuth} from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
+
+
+
 
 
 // Itune -API
@@ -115,7 +117,7 @@ const updateTerm = () => {
                                 .catch((error) => {
                                     console.error('Error fetching data:', error);
                                 });
-                            console.log('Clicked on song:', songname.textContent);
+                            
                         });
                     });
                 }
@@ -151,7 +153,6 @@ mysong.addEventListener('click', function() {
    
     // Assuming `user` is defined elsewhere
     const user = auth.currentUser;
-
     if (user) {
         get(child(dbref, "users/" + user.uid + "/songname"))
             .then((snapshot) => {
@@ -226,7 +227,6 @@ mysong.addEventListener('click', function() {
 
     
 
-console.log(songs)
 
 
 
@@ -262,87 +262,11 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-const database=getDatabase(app);
+const database = getDatabase(app);
 const auth = getAuth();
-const db=getDatabase();
+const db = getDatabase();
 
 
-//for signup
-var submitsignupdata=document.getElementById('submitsignupdata');
-
-if (submitsignupdata) {
-    submitsignupdata.addEventListener('click', (e) => {
-        //taking input from the input box
-        var username = document.getElementById("usernamtext").value;
-        var email = document.getElementById('emails').value;
-        var password = document.getElementById('passwords').value; 
-            
-        //for firebox storing
-        createUserWithEmailAndPassword(auth, email, password)                   
-            .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                //storing the data into realtime 
-                set(ref(database,'users/'+ user.uid),{
-                    username: username,
-                    email:email
-
-                })
-                alert("User Created");
-
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                alert("Please fill carefully!");
-                // ..
-            });
-    });
-}
-
-
-//for login firebase
-var submitlogindata=document.getElementById('submitlogindata')
-
-
-
-if (submitlogindata) {
-    submitlogindata.addEventListener('click', (e) => {
-        //taking 
-        var email = document.getElementById('emaill').value;
-        var password = document.getElementById('passwordl').value; 
-
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                const dt = new Date();
-                //updaing the realtime database of firebase
-                update(ref(database, 'users/' + user.uid), {
-                    last_login: dt,
-                });
-                
-                alert("User logged in!");
-
-                // Hide the signup and login button
-                var signuplogo = document.getElementById('signbtn');
-                var loginlogo = document.getElementById('loginbtn');
-                signuplogo.style.display = "none";
-                loginlogo.style.display='none';
-               
-                //opening the profile page of user after lognin
-                window.location.href = "profile.html"; 
-                
-                
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                alert("Something went wrong!");
-            });
-    });
-}
 
 
 document.addEventListener('DOMContentLoaded', function () {
