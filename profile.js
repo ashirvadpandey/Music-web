@@ -278,6 +278,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Ensure the initial state is hidden
     menuContent.style.display = 'none';
     menuContentMusic.style.display = 'none';
+    menuContentmusic.style.display='none';
 
     toggleMenu.addEventListener('click', function () {
         // Toggle the display property directly
